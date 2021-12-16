@@ -8,13 +8,15 @@ const sauceRoutes = require("./routes/sauce_routes");
 
 const path = require("path");
 
+const dotenv = require("dotenv").config();
+
 const app = express();
 
 mongoose
-  .connect(
-    "mongodb+srv://Jim-Leroux:Jim-Leroux@piquante.duess.mongodb.net/Piiquante?retryWrites=true&w=majority",
-    { useNewUrlParser: true, useUnifiedTopology: true }
-  )
+  .connect(`${process.env.DB_CONNECT}`, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => console.log("Connexion à MongoDB réussie !"))
   .catch(() => console.log("Connexion à MongoDB échouée !"));
 
