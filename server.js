@@ -1,4 +1,7 @@
+// Import du package HTTP de Node.js
 const http = require("http");
+
+// Import de l'application app.js
 const app = require("./app");
 
 const normalizePort = (val) => {
@@ -12,6 +15,8 @@ const normalizePort = (val) => {
   }
   return false;
 };
+
+// Paramètrage du port avec la méthode set de Express
 const port = normalizePort(process.env.PORT || "3000");
 app.set("port", port);
 
@@ -36,6 +41,7 @@ const errorHandler = (error) => {
   }
 };
 
+// La méthode createServer() prend en argument la fonction appelé à chaque requête reçu par le serveur. Les fonctions sont dans l'app.js
 const server = http.createServer(app);
 
 server.on("error", errorHandler);
@@ -45,4 +51,5 @@ server.on("listening", () => {
   console.log("Listening on " + bind);
 });
 
+// Le serveur écoute les requêtes sur le port
 server.listen(port);
