@@ -1,7 +1,10 @@
+// Import de password-validator
 const passwordValidator = require("password-validator");
 
+// Création du schéma
 const passwordSchema = new passwordValidator();
 
+// Ajout des propriétés
 passwordSchema
   .is()
   .min(5)
@@ -17,4 +20,5 @@ passwordSchema
   .not()
   .spaces();
 
+// Export du module
 module.exports = passwordSchema;

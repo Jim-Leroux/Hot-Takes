@@ -15,11 +15,6 @@ const dotenv = require("dotenv").config();
 
 // Enregistrement du nouvel utilisateur dans la DB
 exports.signup = (req, res, next) => {
-  // Chiffrage de l'email avec crypto-js
-  /*const cryptedEmail = cryptoJS.HmacSHA256(
-    req.body.email,
-    `${process.env.MAIL_CRYPTOJS_KEY}`
-  ).toString;*/
   // Hash du MDP avant envoi à la DB
   bcrypt
     .hash(req.body.password, 10) // salt = 10 Éxecution de l'algorithme de hash

@@ -1,6 +1,9 @@
+// Import du model password
 const passwordSchema = require("../models/password_model");
 
+// Export de la fonction du middleware
 module.exports = (req, res, next) => {
+  // Si le mdp ne respecte pas le schéma
   if (!passwordSchema.validate(req.body.password)) {
     res.status(400).json({
       message:
