@@ -20,7 +20,9 @@ const normalizePort = (val) => {
 const port = normalizePort(process.env.PORT || "3000");
 app.set("port", port);
 
+//Gestion des erreurs
 const errorHandler = (error) => {
+  // Méthode syscall node.js
   if (error.syscall !== "listen") {
     throw error;
   }
@@ -44,6 +46,8 @@ const errorHandler = (error) => {
 // La méthode createServer() prend en argument la fonction appelé à chaque requête reçu par le serveur. Les fonctions sont dans l'app.js
 const server = http.createServer(app);
 
+// En cas d'erreur redirige sur errorHandler
+// Sinon on passe en listening
 server.on("error", errorHandler);
 server.on("listening", () => {
   const address = server.address();

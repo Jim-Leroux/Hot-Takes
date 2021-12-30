@@ -29,7 +29,9 @@ exports.signup = (req, res, next) => {
       user
         .save()
         .then(() => res.status(201).json({ message: "Utilisateur créé !" }))
-        .catch((error) => res.status(400).json({ error }));
+        .catch((error) =>
+          res.status(400).json({ error: "Cet email est déja utilisé !" })
+        );
     })
     .catch((error) => res.status(500).json({ error }));
 };
@@ -40,7 +42,9 @@ exports.login = (req, res, next) => {
   User.findOne({ email: req.body.email })
     .then((user) => {
       if (!user) {
-        return res.status(401).json({ error: "Utilisateur non trouvé !" });
+        return res
+          .status(401)
+          .json({ error: "L'identifiant ou le mot de passe est incorrect !" });
       }
       // Contrôle de la validité du MDP
       bcrypt
@@ -48,7 +52,9 @@ exports.login = (req, res, next) => {
         .then((valid) => {
           // Si le MDP est incorrect
           if (!valid) {
-            return res.status(401).json({ error: "Mot de passe incorrect !" });
+            return res.status(401).json({
+              error: "L'identifiant ou le mot de passe est incorrect !",
+            });
           }
           // Si le MDP est valide, envoi de la réponse du serveur avec l'userId & le token
           res.status(200).json({
