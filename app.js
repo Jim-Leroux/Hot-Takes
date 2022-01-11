@@ -18,7 +18,7 @@ const dotenv = require("dotenv").config();
 // Création de l'application Express
 const app = express();
 
-// Import de mongoose pour se connecter à la DB
+// Appel de mongoose pour se connecter à la DB
 mongoose
   .connect(
     `mongodb+srv://${process.env.USER_DB_ACCESS}:${process.env.PASSWORD_DB_ACCESS}@piquante.duess.mongodb.net/${process.env.NAME_DB_ACCESS}?retryWrites=true&w=majority`,
@@ -44,7 +44,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// Conversion du body au format JSON
+// Conversion du body de la requête post au format JSON
 app.use(express.json());
 
 // Route d'authentification

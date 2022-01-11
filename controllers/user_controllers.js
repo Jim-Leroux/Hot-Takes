@@ -7,9 +7,6 @@ const User = require("../models/user_models");
 // Import de jsonwebtoken
 const jwt = require("jsonwebtoken");
 
-// Import de crypto-js
-const cryptoJS = require("crypto-js");
-
 // Import de dotenv
 const dotenv = require("dotenv").config();
 
@@ -42,9 +39,9 @@ exports.login = (req, res, next) => {
   User.findOne({ email: req.body.email })
     .then((user) => {
       if (!user) {
-        return res
-          .status(401)
-          .json({ error: "L'identifiant ou le mot de passe est incorrect !" });
+        return res.status(401).json({
+          message: "L'identifiant ou le mot de passe est incorrect !",
+        });
       }
       // Contrôle de la validité du MDP
       bcrypt
@@ -53,7 +50,7 @@ exports.login = (req, res, next) => {
           // Si le MDP est incorrect
           if (!valid) {
             return res.status(401).json({
-              error: "L'identifiant ou le mot de passe est incorrect !",
+              message: "L'identifiant ou le mot de passe est incorrect !",
             });
           }
           // Si le MDP est valide, envoi de la réponse du serveur avec l'userId & le token

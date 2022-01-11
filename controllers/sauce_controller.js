@@ -32,9 +32,7 @@ exports.createSauce = (req, res, next) => {
       });
     })
     .catch((error) => {
-      res.status(400).json({
-        error: error,
-      });
+      res.status(400).json({ error });
     });
 };
 
@@ -48,9 +46,7 @@ exports.getOneSauce = (req, res, next) => {
       res.status(200).json(sauce);
     })
     .catch((error) => {
-      res.status(404).json({
-        error: error,
-      });
+      res.status(404).json({ error });
     });
 };
 
@@ -62,22 +58,12 @@ exports.getAllSauce = (req, res, next) => {
       res.status(200).json(sauces);
     })
     .catch((error) => {
-      res.status(400).json({
-        error: error,
-      });
+      res.status(404).json({ error });
     });
 };
 
 // Export du controlleur (updateSauce)
 exports.updateSauce = (req, res, next) => {
-  // Suppression de l'image dans le dossier images
-  Sauce.findOne({ _id: req.params.id })
-    .then((sauce) => {
-      const filename = sauce.imageUrl.split("/images/")[1];
-      fs.unlink(`images/${filename}`, () => {});
-    })
-    .catch((error) => res.status(500).json({ error }));
-
   // Modification de l'objet
   const sauceObject = req.file
     ? {

@@ -12,7 +12,6 @@ module.exports = (req, res, next) => {
 
     // Récupération du userId à l'intérieur du token déchiffré
     const userId = decodedToken.userId;
-    req.auth = { userId };
 
     // Comparaison de l'userId de la requête avec celui du token
     if (req.body.userId && req.body.userId !== userId) {
